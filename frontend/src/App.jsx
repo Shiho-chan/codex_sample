@@ -1,34 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+    <div className="portfolio">
+      <header>
+        <h1>Shiho-chan's Portfolio</h1>
+        <p>ようこそ、私のポートフォリオサイトへ！</p>
+      </header>
+      <section>
+        <h2>自己紹介</h2>
+        <p>ここに自己紹介文を入れます。興味のある分野や経歴などを書いてください。</p>
+      </section>
+      <section>
+        <h2>作品</h2>
+        <ul>
+          <li>Project A - 紹介文など</li>
+          <li>Project B - 紹介文など</li>
+          <li>Project C - 紹介文など</li>
+        </ul>
+      </section>
+      <section>
+        <h2>連絡先</h2>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          ご連絡は <a href="mailto:shihochan@example.com">shihochan@example.com</a> までお願いします。
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      </section>
+    </div>
   )
 }
 
