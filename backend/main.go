@@ -10,8 +10,6 @@ func main() {
 		fmt.Fprintln(w, "Hello from Go backend!")
 	})
 
-	http.HandleFunc("/api/login", loginHandler)
-	http.HandleFunc("/api/me", meHandler)
 	http.HandleFunc("/api/comments/", commentByIDHandler)
 	http.HandleFunc("/api/comments", commentsHandler)
 
