@@ -10,42 +10,61 @@ function Board() {
   const [password, setPassword] = useState('')
 
   const fetchComments = async () => {
-    const res = await fetch('/api/comments')
-    setComments(await res.json())
+    try {
+      const res = await fetch('/api/comments')
+      if (!res.ok) return
+      setComments(await res.json())
+    } catch {
+      // ignore
+    }
   }
 
   useEffect(() => {
-    fetch('/api/me').then(async res => {
-      if (res.ok) setUser(await res.json())
-    })
+    fetch('/api/me')
+      .then(async res => {
+        if (res.ok) setUser(await res.json())
+      })
+      .catch(() => {})
     fetchComments()
   }, [])
 
   const login = async (e) => {
     e.preventDefault()
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
-    })
-    if (res.ok) setUser(await res.json())
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      if (res.ok) setUser(await res.json())
+    } catch {
+      // ignore
+    }
   }
 
   const submit = async (e) => {
     e.preventDefault()
-    await fetch('/api/comments', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, text })
-    })
+    try {
+      await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, text })
+      })
+    } catch {
+      // ignore
+    }
     setText('')
     setName('')
     fetchComments()
   }
 
   const remove = async (id) => {
-    await fetch(`/api/comments/${id}`, { method: 'DELETE' })
-    fetchComments()
+    try {
+      await fetch(`/api/comments/${id}`, { method: 'DELETE' })
+      fetchComments()
+    } catch {
+      // ignore
+    }
   }
 
   return (
