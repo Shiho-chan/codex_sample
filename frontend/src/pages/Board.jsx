@@ -23,6 +23,12 @@ function Board() {
     setComments(await res.json())
   }
 
+  const remove = async (id) => {
+    await fetch(`/api/comments/${id}`, { method: 'DELETE' })
+    const res = await fetch('/api/comments')
+    setComments(await res.json())
+  }
+
   return (
     <div className="board">
       <h1>掲示板</h1>
@@ -31,7 +37,12 @@ function Board() {
         <button type="submit">投稿</button>
       </form>
       <ul>
-        {comments.map(c => <li key={c.id}>{c.text}</li>)}
+        {comments.map(c => (
+          <li key={c.id}>
+            {c.text}
+            <button onClick={() => remove(c.id)} className="delete">削除</button>
+          </li>
+        ))}
       </ul>
     </div>
   )
