@@ -10,6 +10,8 @@ func main() {
 		fmt.Fprintln(w, "Hello from Go backend!")
 	})
 
+	http.HandleFunc("/api/comments", commentsHandler)
+
 	fmt.Println("Server started at :8080")
 	http.ListenAndServe(":8080", nil)
 }
